@@ -13,8 +13,12 @@
         <ul class="hidden md:flex flex-col md:flex-row md:space-x-6 text-2xl  bg-green-700 md:bg-transparent shadow-md md:shadow-none  p-4 md:p-0 z-10 w-full md:w-auto absolute md:static top-[113px] left-0"
             id="menu">
             @foreach ($categories as $category)
-                <li><a href="{{ route('news.category', $category->name) }}" class="hover:text-gray-300">{{ $category->name }}</a></li>
+                <li>
+                    <a href="{{ route('news.category', $category) }}"
+                        class="hover:text-gray-300">{{ $category->name }}</a>
+                </li>
             @endforeach
+
             <li><a href="#" class="hover:text-gray-300">টপ অফ দ্য ডে</a></li>
         </ul>
 
