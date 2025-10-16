@@ -15,11 +15,11 @@ class CategorySeeder extends Seeder
     public function run()
     {
         $categories = [
-            ['name' => 'Football'],
-            ['name' => 'Cricket'],
-            ['name' => 'Basketball'],
-            ['name' => 'Tennis'],
-            ['name' => 'Boxing'],
+            ['name' => 'ফুটবল'],
+            ['name' => 'ক্রিকেট'],
+            ['name' => 'বাস্কেটবল'],
+            ['name' => 'টেনিস'],
+            ['name' => 'বক্সিং'],
         ];
 
         foreach ($categories as $category) {

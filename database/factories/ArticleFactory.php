@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Subcategory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use Faker\Factory as FakerFactory;
 
 class ArticleFactory extends Factory
 {
@@ -24,15 +25,17 @@ class ArticleFactory extends Factory
      */
     public function definition()
     {
-        $title = $this->faker->sentence;
+        $fakerBn = FakerFactory::create('bn_BD');
+
+        $title = $fakerBn->sentence;
         $category = Category::inRandomOrder()->first();
         $subcategory = Subcategory::where('category_id', $category->id)->inRandomOrder()->first();
 
         return [
             'title' => $title,
             'slug' => Str::slug($title),
-            'content' => $this->faker->paragraphs(3, true),
-            'author' => $this->faker->name,
+            'content' => $fakerBn->paragraphs(3, true),
+            'author' => $fakerBn->name,
             'image' => 'articles/' . $this->faker->numberBetween(1, 3) . '.jpg',
             'category_id' => $category->id,
             'subcategory_id' => $subcategory ? $subcategory->id : Subcategory::factory(),

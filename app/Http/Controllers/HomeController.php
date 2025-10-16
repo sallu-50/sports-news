@@ -18,18 +18,22 @@ class HomeController extends Controller
         $latestNews = Article::latest()->take(2)->get();
         $lastNews = Article::latest()->take(3)->get();
         
-        $cricketNews = Article::whereHas('subcategory', function ($query) {
-            $query->where('name', 'Cricket');
-        })->latest()->get();
+        // HomeController@index
+        $cricketNews = Article::whereHas('category', function ($query) {
+            $query->where('name', 'ক্রিকেট'); // category name "ক্রিকেট"
+        })
+        ->latest()
+        ->get();
+
         
-        $footballNews = Article::whereHas('subcategory', function ($query) {
-            $query->where('name', 'Football');
+        $footballNews = Article::whereHas('category', function ($query) {
+            $query->where('name', 'ফুটবল');
         })->latest()->get();
         
         $topView = Article::orderByDesc('views')->limit(3)->get();
 
         $otherSportsNews = Article::whereHas('category', function ($query) {
-            $query->where('name', 'Boxing'); // Assuming 'Boxing' is an example of 'other sports'
+            $query->where('name', 'বক্সিং'); // Assuming 'Boxing' is an example of 'other sports'
         })
             ->latest()
             ->get();

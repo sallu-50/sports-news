@@ -16,27 +16,27 @@ class SubcategorySeeder extends Seeder
     public function run()
     {
         $subcategories = [
-            'Football' => [
-                ['name' => 'Premier League'],
-                ['name' => 'La Liga'],
-                ['name' => 'Serie A'],
+            'ফুটবল' => [
+                ['name' => 'প্রিমিয়ার লীগ'],
+                ['name' => 'লা লিগা'],
+                ['name' => 'সেরি এ'],
             ],
-            'Cricket' => [
-                ['name' => 'IPL'],
-                ['name' => 'BBL'],
-                ['name' => 'PSL'],
+            'ক্রিকেট' => [
+                ['name' => 'আইপিএল'],
+                ['name' => 'বিবিএল'],
+                ['name' => 'পিএসএল'],
             ],
-            'Basketball' => [
-                ['name' => 'NBA'],
-                ['name' => 'EuroLeague'],
+            'বাস্কেটবল' => [
+                ['name' => 'এনবিএ'],
+                ['name' => 'ইউরোলীগ'],
             ],
-            'Tennis' => [
-                ['name' => 'ATP'],
-                ['name' => 'WTA'],
+            'টেনিস' => [
+                ['name' => 'এটিপি'],
+                ['name' => 'ডব্লিউটিএ'],
             ],
-            'Boxing' => [
-                ['name' => 'WBC'],
-                ['name' => 'WBA'],
+            'বক্সিং' => [
+                ['name' => 'ডব্লিউবিসি'],
+                ['name' => 'ডব্লিউবিএ'],
             ],
         ];
 
