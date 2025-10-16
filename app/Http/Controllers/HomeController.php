@@ -3,36 +3,38 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
-
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function index()
+    public function index(Request $request, Category $category = null)
     {
+        if ($category && $category->exists) {
+            $categoryArticles = $category->articles()->latest()->paginate(10);
+            return view('welcome', compact('category', 'categoryArticles'));
+        }
+
         $latestNews = Article::latest()->take(2)->get();
         $lastNews = Article::latest()->take(3)->get();
-        // $cricketNews = Article::where('Subcategory', 'cricket')->latest()->get();
+        
         $cricketNews = Article::whereHas('subcategory', function ($query) {
-            $query->where('name', 'cricket');
+            $query->where('name', 'Cricket');
         })->latest()->get();
+        
         $footballNews = Article::whereHas('subcategory', function ($query) {
-            $query->where('name', 'football');
+            $query->where('name', 'Football');
         })->latest()->get();
+        
         $topView = Article::orderByDesc('views')->limit(3)->get();
 
         $otherSportsNews = Article::whereHas('category', function ($query) {
-            $query->where('name', 'sports');
+            $query->where('name', 'Boxing'); // Assuming 'Boxing' is an example of 'other sports'
         })
-            ->whereHas('subcategory', function ($query) {
-                $query->whereNotIn('name', ['cricket', 'football']);
-            })
             ->latest()
             ->get();
 
-
         return view('welcome', compact('latestNews', 'lastNews', 'cricketNews', 'footballNews', 'topView', 'otherSportsNews'));
-        // dd($latestNews);
     }
     public function details($id)
     {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class NewsController extends Controller
@@ -17,5 +18,11 @@ class NewsController extends Controller
     public function news()
     {
         return view('news_details');  // news_details.blade.php রিটার্ন হবে
+    }
+
+    public function showByCategory(Category $category)
+    {
+        $articles = $category->articles()->latest()->paginate(10);
+        return view('category.show', compact('category', 'articles'));
     }
 }

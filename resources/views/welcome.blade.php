@@ -15,11 +15,40 @@
         <span id="current-date"></span>
     </div>
     <x-navbar />
-    <x-top-news :latestNews="$latestNews"></x-top-news>
 
-    <x-cricket-news :lastNews="$lastNews" :cricketNews="$cricketNews"></x-cricket-news>
-    <x-footbal-news :footballNews="$footballNews" :topView="$topView"></x-footbal-news>
-    <x-others-news :otherSportsNews="$otherSportsNews"></x-others-news>
+    @isset($categoryArticles)
+        <div class="container mx-auto mt-12">
+            <h1 class="text-4xl font-bold mb-6">{{ $category->name }}</h1>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                @forelse ($categoryArticles as $article)
+                    <div class="rounded-lg shadow mb-6">
+                        <img src="{{ Storage::url($article->image) }}" alt="News Image"
+                            class="w-full h-[200px] object-cover rounded-lg">
+                        <div class="p-4">
+                            <div class="text-2xl font-bold mt-4">
+                                <a href="{{ route('news.details', $article->id) }}">{{ $article->title }}</a>
+                            </div>
+                            <div class="text-gray-700 mt-2">
+                                <a href="{{ route('news.details', $article->id) }}">{{ Str::limit($article->content, 100, '...') }}</a>
+                            </div>
+                        </div>
+                    </div>
+                @empty
+                    <p class="text-gray-500 text-center text-xl">No articles found in this category.</p>
+                @endforelse
+            </div>
+            <div class="mt-8">
+                {{ $categoryArticles->links() }}
+            </div>
+        </div>
+    @else
+        <x-top-news :latestNews="$latestNews"></x-top-news>
+
+        <x-cricket-news :lastNews="$lastNews" :cricketNews="$cricketNews"></x-cricket-news>
+        <x-footbal-news :footballNews="$footballNews" :topView="$topView"></x-footbal-news>
+        <x-others-news :otherSportsNews="$otherSportsNews"></x-others-news>
+    @endisset
+
     <x-footer></x-footer>
 
     <script>
