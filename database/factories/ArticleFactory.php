@@ -36,7 +36,7 @@ class ArticleFactory extends Factory
             'slug' => Str::slug($title),
             'content' => $fakerBn->paragraphs(3, true),
             'author' => $fakerBn->name,
-            'image' => 'articles/' . $this->faker->numberBetween(1, 3) . '.jpg',
+            'image' => 'https://picsum.photos/' . $this->faker->numberBetween(600, 800) . '/' . $this->faker->numberBetween(400, 600) . '?random=' . $this->faker->unique()->randomNumber(),
             'category_id' => $category->id,
             'subcategory_id' => $subcategory ? $subcategory->id : Subcategory::factory(),
             'views' => $this->faker->numberBetween(0, 1000),
